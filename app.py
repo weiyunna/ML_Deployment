@@ -7,13 +7,13 @@ import numpy as np
 
 app = Flask(__name__)
 
-reg_model = "C:/ML_Deployment/artifacts/reg_model.sav"
+reg_model = "C://ML_Deployment//artifacts//reg_model.sav"
 model = pickle.load(open(reg_model, 'rb'))
 cols = ['age', 'sex', 'bmi', 'children', 'smoker', 'region']
 
 @app.route('/')
 def home():
-    return render_template("C:/ML_Deployment/templates/home.html")
+    return render_template("home.html")
 
 @app.route('/predict',methods=['POST'])
 def predict():
