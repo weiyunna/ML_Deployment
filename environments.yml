@@ -1,0 +1,28 @@
+name : mlDeployment
+dependencies:
+  - python==3.7
+  - pip
+  - seaborn
+  - matplotlib
+  - bokeh
+  - plotly==4.7.1
+  - notebook>=5.3
+  - ipywidgets==7.5
+  
+  - Flask==1.1.1
+  - Jinja2==2.10.1
+  
+  - certifi==2019.11.28
+  - itsdangerous==1.1.0
+  - pip:
+    - plotly==4.7.1
+    - notebook>=5.3
+    - ipywidgets==7.5
+    - pycaret==1.0.0
+    - gunicorn==19.9.0
+   
+#channels refers to where Conda, the environment management tool, is going to look to find the declared dependencies.
+channels:
+  - defaults
+  - anaconda
+  - conda-forge
