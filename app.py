@@ -9,7 +9,7 @@ from sklearn.preprocessing import LabelEncoder
 
 app = Flask(__name__)
 
-reg_model = "C://ML_Deployment//artifacts//reg_model.sav"
+reg_model = "reg_model.sav"
 model = pickle.load(open(reg_model, 'rb'))
 cols = ['age', 'sex', 'bmi', 'children', 'smoker', 'region']
 
