@@ -4,6 +4,8 @@ from flask import Flask,request, url_for, redirect, render_template, jsonify
 import pandas as pd
 import pickle
 import numpy as np
+from sklearn.preprocessing import LabelEncoder
+
 
 app = Flask(__name__)
 
@@ -17,20 +19,25 @@ def home():
 
 @app.route('/predict',methods=['POST'])
 def predict():
-    int_features = [x for x in request.form.values()]
-    final = np.array(int_features)
-    data_unseen = pd.DataFrame([final], columns = cols)
-    prediction = predict_model(model, data=data_unseen, round = 0)
-    prediction = int(prediction.Label[0])
+    int_features = [int(x) for x in request.form.values()]
+    final = np.array([int_features])    
+    prediction = model.predict(final)
+    prediction = round(prediction[0], 2)
+    #data_unseen = pd.DataFrame([final], columns = cols)
+    #prediction = predict_model(model, data=data_unseen, round = 0)
+    #prediction = int(prediction.Label[0])
     return render_template('home.html',pred='Expected Bill will be {}'.format(prediction))
 
 @app.route('/predict_api',methods=['POST'])
 def predict_api():
     data = request.get_json(force=True)
-    data_unseen = pd.DataFrame([data])
-    prediction = predict_model(model, data=data_unseen)
-    output = prediction.Label[0]
-    return jsonify(output)
+    final = np.array([int_features])    
+    prediction = model.predict(final)
+    prediction = round(prediction[0], 2)
+    #data_unseen = pd.DataFrame([data])
+    #prediction = predict_model(model, data=data_unseen)
+    #output = prediction.Label[0]
+    return jsonify(prediction)
 
 if __name__ == '__main__':
     app.run(debug=True)
